@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
 
 # load cleaned data
@@ -24,5 +26,23 @@ x_test[int_features] = scaler.transform(x_test[int_features])
 # fix imbalanced taining data
 smote = SMOTE(random_state=28)
 x_train_balanced, y_train_balanced = smote.fit_resample(x_train, y_train)
+
+# train random forest model 
+rf_model = RandomForestClassifier(
+    n_estimators=100,   
+    random_state=28, 
+    max_depth=6,       
+    min_samples_split=20,  
+    min_samples_leaf=15,  
+    class_weight={0: 1, 1: 2}  
+)
+rf_model.fit(x_train_balanced, y_train_balanced)
+
+# make predictions
+rf_predictions = rf_model.predict(x_test)
+
+# test random forest model
+print('Random Forest Model')
+print(classification_report(y_test, rf_predictions), accuracy_score(y_test, rf_predictions))
 
 
