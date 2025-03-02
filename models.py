@@ -60,9 +60,9 @@ xgb_model.fit(x_train_balanced, y_train_balanced)
 xgb_predictions = xgb_model.predict(x_test)
 
 # test xgboost model
-print("XGBoost Model Performance:")
-print(classification_report(y_test, xgb_predictions))
-print("Accuracy:", accuracy_score(y_test, xgb_predictions))
+print('XGBoost Model')
+print(classification_report(y_test, xgb_predictions), accuracy_score(y_test, xgb_predictions))
+
 
 
 
