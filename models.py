@@ -8,12 +8,11 @@ from imblearn.over_sampling import SMOTE
 from xgboost import XGBClassifier
 
 # load cleaned data
-file_path = 'cleaned_traffic_accidents.csv'
-traffic_data = pd.read_csv(file_path)
+clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
 
 # define features and target
-x = traffic_data.drop(columns=['cars_involved'])  
-y = (traffic_data['cars_involved'] >= 3).astype(int)  
+x = clean_traffic_data.drop(columns=['cars_involved'])  
+y = (clean_traffic_data['cars_involved'] >= 3).astype(int)  
 
 # split into training and testing 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=28, stratify=y)

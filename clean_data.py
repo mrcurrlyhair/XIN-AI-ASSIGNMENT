@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 
 # load dataset
-file_path = 'traffic_accidents.csv' 
-traffic_data = pd.read_csv(file_path)
+traffic_data = pd.read_csv('traffic_accidents.csv')
 
 # rename num_units to cars_involved
 traffic_data.rename(columns={'num_units': 'cars_involved'}, inplace=True)
