@@ -5,6 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
+from xgboost import XGBClassifier
 
 # load cleaned data
 file_path = 'cleaned_traffic_accidents.csv'
@@ -44,5 +45,24 @@ rf_predictions = rf_model.predict(x_test)
 # test random forest model
 print('Random Forest Model')
 print(classification_report(y_test, rf_predictions), accuracy_score(y_test, rf_predictions))
+
+# train xgboost model
+xgb_model = XGBClassifier(
+    scale_pos_weight=100,
+    n_estimators=200,
+    max_depth=10,
+    learning_rate=0.05,
+    random_state=28
+)
+xgb_model.fit(x_train_balanced, y_train_balanced)
+
+# make predictions
+xgb_predictions = xgb_model.predict(x_test)
+
+# test xgboost model
+print("XGBoost Model Performance:")
+print(classification_report(y_test, xgb_predictions))
+print("Accuracy:", accuracy_score(y_test, xgb_predictions))
+
 
 
