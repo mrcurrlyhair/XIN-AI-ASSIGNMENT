@@ -25,14 +25,14 @@ plt.close()
 
 # accident frequency by day of the week
 plt.figure(figsize=(10,5))
-clean_traffic_data['crash_day_of_week'].value_counts().sort_index().plot(kind='bar', color='g')
+clean_traffic_data['crash_day_of_week'].value_counts().sort_index().plot(kind='bar', color='b')
 plt.xlabel('day of the week (0=monday, 6=sunday)')
 plt.ylabel('number of accidents')
 plt.title('accident frequency by day of the week')
 plt.show()
 plt.close()
 
-# weather condition vs. multi-vehicle accidents (using OHE columns)
+# weather condition v multi-vehicle accidents 
 weather_columns = [
     'weather_condition_BLOWING SAND, SOIL, DIRT',
     'weather_condition_BLOWING SNOW',
@@ -47,12 +47,12 @@ weather_columns = [
     'weather_condition_SNOW'
 ]
 
-# Sum of multi-vehicle accidents per weather condition
+# sum of multi-vehicle accidents per weather condition
 multi_vehicle_counts = clean_traffic_data[clean_traffic_data['cars_involved'] >= 3][weather_columns].sum()
 
-# Plot the data
+# plot the data
 plt.figure(figsize=(12,5))
-multi_vehicle_counts.plot(kind='bar', color='r')
+multi_vehicle_counts.plot(kind='bar', color='b')
 plt.xlabel('weather condition')
 plt.ylabel('number of multi-vehicle accidents')
 plt.title('weather condition vs. multi-vehicle accidents')
@@ -63,10 +63,13 @@ plt.close()
 # correlation heatmap NEEDS FIXING
 plt.figure(figsize=(12,8))
 corr_matrix = clean_traffic_data.corr()
-sns.heatmap(corr_matrix, annot=True, fmt='.2f', cmap='coolwarm', linewidths=0.5)
+sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', linewidths=0.5)
+plt.xticks(fontsize=6)
+plt.yticks(fontsize=6)
 plt.title('correlation heatmap')
 plt.show()
 plt.close()
+
 
 
 
