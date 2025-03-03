@@ -4,8 +4,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, binarize
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.utils.class_weight import compute_sample_weight
+from sklearn.naive_bayes import GaussianNB
 from imblearn.over_sampling import SMOTE
-from xgboost import XGBClassifier
+
 
 
 # load cleaned data
@@ -28,6 +30,7 @@ x_test[int_features] = scaler.transform(x_test[int_features])
 smote = SMOTE(random_state=28)
 x_train_balanced, y_train_balanced = smote.fit_resample(x_train, y_train)
 
+
 # train random forest model 
 rf_model = RandomForestClassifier(
     n_estimators=100,   
@@ -48,34 +51,31 @@ rf_prediction = (rf_prob >= rf_threshold).astype(int)
 print('Random Forest Model')
 print(classification_report(y_test, rf_prediction), accuracy_score(y_test, rf_prediction))
 
-# train xgboost model
-xgb_model = XGBClassifier(
-    scale_pos_weight=100,
-    n_estimators=200,
-    max_depth=10,
-    learning_rate=0.05,
-    random_state=28
-)
-xgb_model.fit(x_train_balanced, y_train_balanced)
+
+# train naive bayes model
+nb_model = GaussianNB()
+nb_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
-xgb_threshold = 0.75
-xgb_prob = xgb_model.predict_proba(x_test)[:, 1]
-xgb_prediction = (xgb_prob >= xgb_threshold).astype(int)
+nb_threshold = 0.5
+nb_prob = nb_model.predict_proba(x_test)[:, 1]
+nb_prediction = (nb_prob >= nb_threshold).astype(int)
 
 # test xgboost model
-print('XGBoost Model')
-print(classification_report(y_test, xgb_prediction), accuracy_score(y_test, xgb_prediction))
+print('Naive Bayes Model')
+print(classification_report(y_test, nb_prediction), accuracy_score(y_test, nb_prediction))
+      
 
 # train optimized gradient boosting model
 gb_model = GradientBoostingClassifier(
-    n_estimators=100,
-    learning_rate=0.1,
-    max_depth=5, 
+    n_estimators=500,
+    learning_rate=0.03,
+    max_depth=6, 
     subsample=0.8, 
     min_samples_split=10, 
     warm_start=True, 
-    random_state=28)
+    random_state=28
+)
 
 gb_model.fit(x_train_balanced, y_train_balanced)
 
