@@ -60,7 +60,7 @@ plt.xticks(rotation=45)
 plt.show()
 plt.close()
 
-# correlation heatmap NEEDS FIXING
+# correlation heatmap 
 plt.figure(figsize=(12,8))
 corr_matrix = clean_traffic_data.corr()
 sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', linewidths=0.5)

@@ -9,8 +9,6 @@ from sklearn.naive_bayes import GaussianNB
 from imblearn.over_sampling import SMOTE
 
 
-
-
 # load cleaned data
 clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
 
@@ -70,19 +68,20 @@ print(classification_report(y_test, nb_prediction), accuracy_score(y_test, nb_pr
 # train optimized gradient boosting model
 gb_model = GradientBoostingClassifier(
     verbose=1,
-    n_estimators=500,
+    n_estimators=200,
     learning_rate=0.02,
-    max_depth=8, 
-    subsample=1, 
+    max_depth=4, 
+    subsample=0.8, 
     min_samples_split=5, 
     warm_start=True, 
-    random_state=28
+    random_state=28,
+    max_features='sqrt'
 )
 
 gb_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
-gb_threshold = 0.4
+gb_threshold = 0.57
 gb_prob = gb_model.predict_proba(x_test)[:, 1]
 gb_prediction = (gb_prob >= gb_threshold).astype(int)
 
