@@ -7,8 +7,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.naive_bayes import GaussianNB
 from imblearn.over_sampling import SMOTE
-from tqdm import tqdm
-import time
+
 
 
 
@@ -70,10 +69,11 @@ print(classification_report(y_test, nb_prediction), accuracy_score(y_test, nb_pr
 
 # train optimized gradient boosting model
 gb_model = GradientBoostingClassifier(
+    verbose=1,
     n_estimators=500,
     learning_rate=0.02,
     max_depth=8, 
-    subsample=0.85, 
+    subsample=1, 
     min_samples_split=5, 
     warm_start=True, 
     random_state=28
