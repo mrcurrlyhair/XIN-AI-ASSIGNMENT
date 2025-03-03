@@ -7,6 +7,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
 from xgboost import XGBClassifier
 
+
 # load cleaned data
 clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
 
