@@ -7,6 +7,8 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.naive_bayes import GaussianNB
 from imblearn.over_sampling import SMOTE
+from tqdm import tqdm
+import time
 
 
 
@@ -61,7 +63,7 @@ nb_threshold = 0.5
 nb_prob = nb_model.predict_proba(x_test)[:, 1]
 nb_prediction = (nb_prob >= nb_threshold).astype(int)
 
-# test xgboost model
+# test naive bayes model
 print('Naive Bayes Model')
 print(classification_report(y_test, nb_prediction), accuracy_score(y_test, nb_prediction))
       
@@ -69,10 +71,10 @@ print(classification_report(y_test, nb_prediction), accuracy_score(y_test, nb_pr
 # train optimized gradient boosting model
 gb_model = GradientBoostingClassifier(
     n_estimators=500,
-    learning_rate=0.03,
-    max_depth=6, 
-    subsample=0.8, 
-    min_samples_split=10, 
+    learning_rate=0.02,
+    max_depth=8, 
+    subsample=0.85, 
+    min_samples_split=5, 
     warm_start=True, 
     random_state=28
 )
@@ -80,8 +82,9 @@ gb_model = GradientBoostingClassifier(
 gb_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
+gb_threshold = 0.4
 gb_prob = gb_model.predict_proba(x_test)[:, 1]
-gb_prediction = (gb_prob >= rf_threshold).astype(int)
+gb_prediction = (gb_prob >= gb_threshold).astype(int)
 
 # test optimized gradient boosting model
 print('Gradient Boosting Model')
