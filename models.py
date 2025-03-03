@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, binarize
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
@@ -34,16 +34,18 @@ rf_model = RandomForestClassifier(
     max_depth=6,       
     min_samples_split=20,  
     min_samples_leaf=15,  
-    class_weight={0: 1, 1: 2}  
+    class_weight={0: 1, 1: 1.5}  
 )
 rf_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
-rf_predictions = rf_model.predict(x_test)
+threshold = 0.6
+rf_prob = rf_model.predict_proba(x_test)[:, 1]
+rf_prediction = (rf_prob >= threshold).astype(int)
 
 # test random forest model
 print('Random Forest Model')
-print(classification_report(y_test, rf_predictions), accuracy_score(y_test, rf_predictions))
+print(classification_report(y_test, rf_prediction), accuracy_score(y_test, rf_prediction))
 
 # train xgboost model
 xgb_model = XGBClassifier(
@@ -56,11 +58,12 @@ xgb_model = XGBClassifier(
 xgb_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
-xgb_predictions = xgb_model.predict(x_test)
+xgb_prob = xgb_model.predict_proba(x_test)[:, 1]
+xgb_prediction = (xgb_prob >= threshold).astype(int)
 
 # test xgboost model
 print('XGBoost Model')
-print(classification_report(y_test, xgb_predictions), accuracy_score(y_test, xgb_predictions))
+print(classification_report(y_test, xgb_prediction), accuracy_score(y_test, xgb_prediction))
 
 
 

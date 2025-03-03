@@ -12,6 +12,12 @@ plt.xlabel('Number of Cars Involved')
 plt.ylabel('Count')
 plt.title('Distribution of Cars Involved in Accidents')
 plt.show()
+plt.close()
+
+
+
+
+
 
 
 
