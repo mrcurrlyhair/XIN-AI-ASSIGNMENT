@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, binarize
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, classification_report
 from imblearn.over_sampling import SMOTE
 from xgboost import XGBClassifier
@@ -40,9 +40,9 @@ rf_model = RandomForestClassifier(
 rf_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
-threshold = 0.6
+rf_threshold = 0.6
 rf_prob = rf_model.predict_proba(x_test)[:, 1]
-rf_prediction = (rf_prob >= threshold).astype(int)
+rf_prediction = (rf_prob >= rf_threshold).astype(int)
 
 # test random forest model
 print('Random Forest Model')
@@ -59,13 +59,33 @@ xgb_model = XGBClassifier(
 xgb_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
+xgb_threshold = 0.75
 xgb_prob = xgb_model.predict_proba(x_test)[:, 1]
-xgb_prediction = (xgb_prob >= threshold).astype(int)
+xgb_prediction = (xgb_prob >= xgb_threshold).astype(int)
 
 # test xgboost model
 print('XGBoost Model')
 print(classification_report(y_test, xgb_prediction), accuracy_score(y_test, xgb_prediction))
 
+# train optimized gradient boosting model
+gb_model = GradientBoostingClassifier(
+    n_estimators=100,
+    learning_rate=0.1,
+    max_depth=5, 
+    subsample=0.8, 
+    min_samples_split=10, 
+    warm_start=True, 
+    random_state=28)
+
+gb_model.fit(x_train_balanced, y_train_balanced)
+
+# make predictions
+gb_prob = gb_model.predict_proba(x_test)[:, 1]
+gb_prediction = (gb_prob >= rf_threshold).astype(int)
+
+# test optimized gradient boosting model
+print('Gradient Boosting Model')
+print(classification_report(y_test, gb_prediction), accuracy_score(y_test, gb_prediction))
 
 
 
