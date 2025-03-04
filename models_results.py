@@ -66,6 +66,8 @@ def matrix(y_true, y_pred, model_name):
     plt.ylabel('Actual')
     plt.title(f'Confusion Matrix - {model_name}')
     plt.show()
+    plt.close()
+
 
 # create confusion matrixes for each model
 matrix(y_true, rf_model.predict(x_full), 'Random Forest')
@@ -90,6 +92,8 @@ plt.title('Precision-Recall Curve Comparison')
 plt.legend()
 plt.grid()
 plt.show()
+plt.close()
+
 
 # function to plot feature importances for decision tree models
 def f_importance(model, model_name, feature_names):
@@ -100,6 +104,8 @@ def f_importance(model, model_name, feature_names):
     plt.xlabel('Feature Importance')
     plt.title(f'Top Features - {model_name}')
     plt.show()
+    plt.close()
+
 
 # show feature importances for random forest and gradient boosting
 f_importance(rf_model, 'Random Forest', x_full.columns)
@@ -115,6 +121,8 @@ def nb_importance(model, feature_names):
     plt.xlabel('Importance (Log Probabilities)')
     plt.title('Feature Importance - Naive Bayes')
     plt.show()
+    plt.close()
+
 
 # show feature importance for naive bayes
 nb_importance(nb_model, x_full.columns)
@@ -137,8 +145,9 @@ nb_high_risk = clean_traffic_data['nb_pred'].sum()
 # create a bar chart comparing actual accidents v model predictions
 plt.figure(figsize=(8, 5))
 plt.bar(['Actual', 'Random Forest', 'Gradient Boosting', 'Naive Bayes'], 
-        [actual_high_risk, rf_high_risk, gb_high_risk, nb_high_risk], color=['gray', 'b', 'g', 'r'])
+        [actual_high_risk, rf_high_risk, gb_high_risk, nb_high_risk], color=['black', 'r', 'g', 'b'])
 plt.xlabel('Model')
 plt.ylabel('Number of High-Risk Accidents')
 plt.title('Actual vs Predicted High-Risk Accident Comparison')
 plt.show()
+plt.close()
