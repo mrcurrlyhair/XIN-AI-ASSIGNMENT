@@ -8,7 +8,7 @@ from sklearn.metrics import confusion_matrix, precision_recall_curve, accuracy_s
 # load cleaned dataset
 clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
 
-# load the trained models
+# load the models
 with open('saved_models/rf_model.pkl', 'rb') as f:
     rf_model = pickle.load(f)
 
@@ -18,7 +18,7 @@ with open('saved_models/gb_model.pkl', 'rb') as f:
 with open('saved_models/nb_model.pkl', 'rb') as f:
     nb_model = pickle.load(f)
 
-# drop 'cars_involved' from dataset before predicting
+# drop cars_involved 
 x_full = clean_traffic_data.drop(columns=['cars_involved'])
 
 # model performance benchmarks 
@@ -134,9 +134,9 @@ rf_high_risk = clean_traffic_data['rf_pred'].sum()
 gb_high_risk = clean_traffic_data['gb_pred'].sum()
 nb_high_risk = clean_traffic_data['nb_pred'].sum()
 
-# create a bar chart comparing actual accidents vs model predictions
+# create a bar chart comparing actual accidents v model predictions
 plt.figure(figsize=(8, 5))
-plt.bar(['Actual', 'Random Forest', 'Gradient Boosting', 'Naïve Bayes'], 
+plt.bar(['Actual', 'Random Forest', 'Gradient Boosting', 'Naive Bayes'], 
         [actual_high_risk, rf_high_risk, gb_high_risk, nb_high_risk], color=['gray', 'b', 'g', 'r'])
 plt.xlabel('Model')
 plt.ylabel('Number of High-Risk Accidents')
