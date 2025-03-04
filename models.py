@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, binarize
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
@@ -50,6 +51,11 @@ rf_prediction = (rf_prob >= rf_threshold).astype(int)
 print('Random Forest Model')
 print(classification_report(y_test, rf_prediction), accuracy_score(y_test, rf_prediction))
 
+# save random forest
+with open('saved_models/rf_model.pkl', 'wb') as f:
+    pickle.dump(rf_model, f)
+print('saved rf model')
+
 
 # train naive bayes model
 nb_model = GaussianNB()
@@ -63,7 +69,11 @@ nb_prediction = (nb_prob >= nb_threshold).astype(int)
 # test naive bayes model
 print('Naive Bayes Model')
 print(classification_report(y_test, nb_prediction), accuracy_score(y_test, nb_prediction))
-      
+
+# save naive bayes
+with open('saved_models/nb_model.pkl', 'wb') as f:
+    pickle.dump(nb_model, f)
+print('saved ny model')
 
 # train optimized gradient boosting model
 gb_model = GradientBoostingClassifier(
@@ -88,6 +98,11 @@ gb_prediction = (gb_prob >= gb_threshold).astype(int)
 # test optimized gradient boosting model
 print('Gradient Boosting Model')
 print(classification_report(y_test, gb_prediction), accuracy_score(y_test, gb_prediction))
+
+# save gradient boosting
+with open('saved_models/gb_model.pkl', 'wb') as f:
+    pickle.dump(gb_model, f)    
+print('saved gb model')
 
 
 
