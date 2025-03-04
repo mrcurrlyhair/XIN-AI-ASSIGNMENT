@@ -62,7 +62,7 @@ nb_model = GaussianNB()
 nb_model.fit(x_train_balanced, y_train_balanced)
 
 # make predictions
-nb_threshold = 0.5
+nb_threshold = 0.6
 nb_prob = nb_model.predict_proba(x_test)[:, 1]
 nb_prediction = (nb_prob >= nb_threshold).astype(int)
 
