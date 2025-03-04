@@ -73,9 +73,9 @@ gb_model = GradientBoostingClassifier(
     max_depth=4, 
     subsample=0.8, 
     min_samples_split=5, 
-    warm_start=True, 
-    random_state=28,
-    max_features='sqrt'
+    warm_start=True,
+    max_features='sqrt', 
+    random_state=28
 )
 
 gb_model.fit(x_train_balanced, y_train_balanced)
