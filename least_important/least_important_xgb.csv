@@ -1,0 +1,11 @@
+xgb features
+injuries_fatal
+"weather_condition_BLOWING SAND, SOIL, DIRT"
+weather_condition_BLOWING SNOW
+weather_condition_SEVERE CROSS WIND GATE
+roadway_surface_cond_OTHER
+"roadway_surface_cond_SAND, MUD, DIRT"
+traffic_control_device_BICYCLE CROSSING SIGN
+traffic_control_device_RR CROSSING SIGN
+traffic_control_device_OTHER WARNING SIGN
+traffic_control_device_PEDESTRIAN CROSSING SIGN
