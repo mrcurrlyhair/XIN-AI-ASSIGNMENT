@@ -13,7 +13,7 @@ from imblearn.over_sampling import SMOTE
 # load cleaned dataset
 clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
 
-# Load least important features files (Check if they exist first)
+# load least important features files
 def load_least_imp(filename):
     return pd.read_csv(filename)['features'].tolist() if os.path.exists(filename) else []
 
@@ -21,18 +21,18 @@ least_important_rf = load_least_imp('least_important/least_important_rf.csv')
 least_important_xgb = load_least_imp('least_important/least_important_xgb.csv')
 least_important_gb = load_least_imp('least_important/least_important_gb.csv')
 
-# Define features and target for each model
+# define features and target for each model
 x_rf = clean_traffic_data.drop(columns=['cars_involved'] + least_important_rf)
 x_xgb = clean_traffic_data.drop(columns=['cars_involved'] + least_important_xgb)
 x_gb = clean_traffic_data.drop(columns=['cars_involved'] + least_important_gb)  
 y = (clean_traffic_data['cars_involved'] >= 3).astype(int)
 
-# Split into training and testing for each model
+# split into training and testing for each model
 x_train_rf, x_test_rf, y_train_rf, y_test_rf = train_test_split(x_rf, y, test_size=0.2, random_state=28, stratify=y)
 x_train_xgb, x_test_xgb, y_train_xgb, y_test_xgb = train_test_split(x_xgb, y, test_size=0.2, random_state=28, stratify=y)
 x_train_gb, x_test_gb, y_train_gb, y_test_gb = train_test_split(x_gb, y, test_size=0.2, random_state=28, stratify=y)
 
-# scale integer features
+# scale integer features 
 scaler = StandardScaler()
 int_features = ['crash_hour', 'crash_day_of_week']
 x_train_rf[int_features] = scaler.fit_transform(x_train_rf[int_features])
