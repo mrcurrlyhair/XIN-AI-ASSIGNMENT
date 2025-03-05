@@ -67,7 +67,7 @@ def f_importance(model, model_name, feature_names):
     plt.show()
     plt.close()
 
-# user menu for graph selection
+# menu for graph selection
 while True:
     print("\nSelect a graph to display")
     print("1 Models Performance")
@@ -135,7 +135,7 @@ while True:
         plt.show()
     
     elif option == '6':
-        print("quiting")
+        print("Quiting")
         break
     else:
-        print("invalid option")
+        print("Invalid option")
