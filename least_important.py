@@ -40,3 +40,21 @@ xgb_least_important = xgb_features[xgb_index[:10]]
 xgb_df = pd.DataFrame(xgb_least_important, columns=['xgb features'])
 xgb_df.to_csv('least_important/least_important_xgb.csv', index=False)
 print("xgb least important features saved")
+
+# load gradient boost model
+with open('saved_models/gb_model.pkl', 'rb') as f:
+    gb_model = pickle.load(f)
+
+# get feature importance from gb
+gb_importance = gb_model.feature_importances_
+gb_features = x_test.columns
+
+# find 10 least important features
+gb_index = np.argsort(gb_importance)
+gb_least_important = gb_features[gb_index[:10]]
+
+# save least important features 
+gb_df = pd.DataFrame(gb_least_important, columns=['gb features'])
+gb_df.to_csv('least_important/least_important_gb.csv', index=False)
+print("gb least important features saved")
+
