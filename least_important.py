@@ -19,7 +19,7 @@ rf_features = x_test.columns
 rf_least_important = rf_features[rf_importance == 0]
 
 # save least important features 
-rf_df = pd.DataFrame(rf_least_important, columns=['rf features'])
+rf_df = pd.DataFrame(rf_least_important, columns=['features'])
 rf_df.to_csv('least_important/least_important_rf.csv', index=False)
 print("rf least important features saved")
 
@@ -35,7 +35,7 @@ xgb_features = x_test.columns
 xgb_least_important = xgb_features[xgb_importance == 0]
 
 # save least important features 
-xgb_df = pd.DataFrame(xgb_least_important, columns=['xgb features'])
+xgb_df = pd.DataFrame(xgb_least_important, columns=['features'])
 xgb_df.to_csv('least_important/least_important_xgb.csv', index=False)
 print("xgb least important features saved")
 
@@ -51,7 +51,7 @@ gb_features = x_test.columns
 gb_least_important = gb_features[gb_importance == 0]
 
 # save least important features 
-gb_df = pd.DataFrame(gb_least_important, columns=['gb features'])
+gb_df = pd.DataFrame(gb_least_important, columns=['features'])
 gb_df.to_csv('least_important/least_important_gb.csv', index=False)
 print("gb least important features saved")
 
