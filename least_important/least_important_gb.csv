@@ -1,11 +1,11 @@
 gb features
-weather_condition_BLOWING SNOW
 "weather_condition_BLOWING SAND, SOIL, DIRT"
-traffic_control_device_BICYCLE CROSSING SIGN
+weather_condition_BLOWING SNOW
 weather_condition_SEVERE CROSS WIND GATE
 "roadway_surface_cond_SAND, MUD, DIRT"
-traffic_control_device_RAILROAD CROSSING GATE
-traffic_control_device_NO PASSING
+traffic_control_device_BICYCLE CROSSING SIGN
 traffic_control_device_DELINEATORS
-prim_contributory_cause_OBSTRUCTED CROSSWALKS
+traffic_control_device_NO PASSING
+traffic_control_device_RAILROAD CROSSING GATE
 prim_contributory_cause_BICYCLE ADVANCING LEGALLY ON RED LIGHT
+prim_contributory_cause_OBSTRUCTED CROSSWALKS

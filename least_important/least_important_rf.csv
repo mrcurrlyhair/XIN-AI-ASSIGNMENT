@@ -1,11 +1,10 @@
 rf features
 "weather_condition_BLOWING SAND, SOIL, DIRT"
 weather_condition_SEVERE CROSS WIND GATE
-traffic_control_device_SCHOOL ZONE
 traffic_control_device_DELINEATORS
 traffic_control_device_RAILROAD CROSSING GATE
 traffic_control_device_RR CROSSING SIGN
-prim_contributory_cause_DISREGARDING ROAD MARKINGS
+traffic_control_device_SCHOOL ZONE
 prim_contributory_cause_ANIMAL
 prim_contributory_cause_BICYCLE ADVANCING LEGALLY ON RED LIGHT
-weather_condition_BLOWING SNOW
+prim_contributory_cause_DISREGARDING ROAD MARKINGS

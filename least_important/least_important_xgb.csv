@@ -6,6 +6,33 @@ weather_condition_SEVERE CROSS WIND GATE
 roadway_surface_cond_OTHER
 "roadway_surface_cond_SAND, MUD, DIRT"
 traffic_control_device_BICYCLE CROSSING SIGN
-traffic_control_device_RR CROSSING SIGN
+traffic_control_device_DELINEATORS
+traffic_control_device_FLASHING CONTROL SIGNAL
+traffic_control_device_LANE USE MARKING
+traffic_control_device_NO PASSING
+traffic_control_device_OTHER RAILROAD CROSSING
 traffic_control_device_OTHER WARNING SIGN
 traffic_control_device_PEDESTRIAN CROSSING SIGN
+traffic_control_device_POLICE/FLAGMAN
+traffic_control_device_RAILROAD CROSSING GATE
+traffic_control_device_RR CROSSING SIGN
+traffic_control_device_SCHOOL ZONE
+trafficway_type_L-INTERSECTION
+trafficway_type_NOT REPORTED
+trafficway_type_RAMP
+trafficway_type_ROUNDABOUT
+trafficway_type_Y-INTERSECTION
+"road_defect_RUT, HOLES"
+road_defect_SHOULDER DEFECT
+prim_contributory_cause_ANIMAL
+prim_contributory_cause_BICYCLE ADVANCING LEGALLY ON RED LIGHT
+prim_contributory_cause_DISREGARDING ROAD MARKINGS
+prim_contributory_cause_DISREGARDING YIELD SIGN
+"prim_contributory_cause_DISTRACTION - OTHER ELECTRONIC DEVICE (NAVIGATION DEVICE, DVD PLAYER, ETC.)"
+prim_contributory_cause_MOTORCYCLE ADVANCING LEGALLY ON RED LIGHT
+prim_contributory_cause_OBSTRUCTED CROSSWALKS
+prim_contributory_cause_PASSING STOPPED SCHOOL BUS
+prim_contributory_cause_RELATED TO BUS STOP
+prim_contributory_cause_ROAD CONSTRUCTION/MAINTENANCE
+prim_contributory_cause_ROAD ENGINEERING/SURFACE/MARKING DEFECTS
+most_severe_injury_FATAL

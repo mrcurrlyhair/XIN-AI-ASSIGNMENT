@@ -15,9 +15,8 @@ with open('saved_models/rf_model.pkl', 'rb') as f:
 rf_importance = rf_model.feature_importances_
 rf_features = x_test.columns
 
-# find 10 least important features
-rf_index = np.argsort(rf_importance)
-rf_least_important = rf_features[rf_index[:10]]
+# finding all features with no importantce 
+rf_least_important = rf_features[rf_importance == 0]
 
 # save least important features 
 rf_df = pd.DataFrame(rf_least_important, columns=['rf features'])
@@ -32,9 +31,8 @@ with open('saved_models/xgb_model.pkl', 'rb') as f:
 xgb_importance = xgb_model.feature_importances_
 xgb_features = x_test.columns
 
-# find 10 least important features
-xgb_index = np.argsort(xgb_importance)
-xgb_least_important = xgb_features[xgb_index[:10]]
+# finding all features with no importantce
+xgb_least_important = xgb_features[xgb_importance == 0]
 
 # save least important features 
 xgb_df = pd.DataFrame(xgb_least_important, columns=['xgb features'])
@@ -49,9 +47,8 @@ with open('saved_models/gb_model.pkl', 'rb') as f:
 gb_importance = gb_model.feature_importances_
 gb_features = x_test.columns
 
-# find 10 least important features
-gb_index = np.argsort(gb_importance)
-gb_least_important = gb_features[gb_index[:10]]
+# finding all features with no importantce
+gb_least_important = gb_features[gb_importance == 0]
 
 # save least important features 
 gb_df = pd.DataFrame(gb_least_important, columns=['gb features'])
