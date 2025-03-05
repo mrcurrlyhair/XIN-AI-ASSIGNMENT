@@ -18,17 +18,24 @@ with open('saved_models/gb_model.pkl', 'rb') as f:
 with open('saved_models/xgb_model.pkl', 'rb') as f:
     xgb_model = pickle.load(f)
 
-# drop cars_involved
+# drop cars_involved 
+expected_features_rf = rf_model.feature_names_in_
+expected_features_gb = gb_model.feature_names_in_
+expected_features_xgb = xgb_model.feature_names_in_
 x_full = clean_traffic_data.drop(columns=['cars_involved'])
+x_full_rf = x_full[expected_features_rf]
+x_full_gb = x_full[expected_features_gb]
+x_full_xgb = x_full[expected_features_xgb]
 
 # make predictions and save them to the dataset
-clean_traffic_data['rf_pred'] = rf_model.predict(x_full)
-clean_traffic_data['gb_pred'] = gb_model.predict(x_full)
-clean_traffic_data['xgb_pred'] = xgb_model.predict(x_full)
+clean_traffic_data['rf_pred'] = rf_model.predict(x_full_rf)
+clean_traffic_data['gb_pred'] = gb_model.predict(x_full_gb)
+clean_traffic_data['xgb_pred'] = xgb_model.predict(x_full_xgb)
 
 # save dataset with predictions
 clean_traffic_data.to_csv('cleaned_traffic_accidents_predictions.csv', index=False)
-print('Predictions Saved') 
+print('Predictions saved') 
+
 
 # model performance benchmarks 
 def model_bench(model, x_full, y_true):
@@ -38,9 +45,9 @@ def model_bench(model, x_full, y_true):
 
 # benchmarks for each model
 y_true = (clean_traffic_data['cars_involved'] >= 3).astype(int)
-rf_accuracy, rf_recall, rf_precision, rf_f1 = model_bench(rf_model, x_full, y_true)
-gb_accuracy, gb_recall, gb_precision, gb_f1 = model_bench(gb_model, x_full, y_true)
-xgb_accuracy, xgb_recall, xgb_precision, xgb_f1 = model_bench(xgb_model, x_full, y_true)
+rf_accuracy, rf_recall, rf_precision, rf_f1 = model_bench(rf_model, x_full_rf, y_true)
+gb_accuracy, gb_recall, gb_precision, gb_f1 = model_bench(gb_model, x_full_gb, y_true)
+xgb_accuracy, xgb_recall, xgb_precision, xgb_f1 = model_bench(xgb_model, x_full_xgb, y_true)
 
 m_name = ['Random Forest', 'Gradient Boosting', 'XGBoost']
 accuracy = [rf_accuracy, gb_accuracy, xgb_accuracy]
@@ -106,16 +113,16 @@ while True:
     
     elif option == '2':
         # confusion matrixes
-        matrix(y_true, rf_model.predict(x_full), 'Random Forest')
-        matrix(y_true, gb_model.predict(x_full), 'Gradient Boosting')
-        matrix(y_true, xgb_model.predict(x_full), 'XGBoost')
+        matrix(y_true, rf_model.predict(x_full_rf), 'Random Forest')
+        matrix(y_true, gb_model.predict(x_full_gb), 'Gradient Boosting')
+        matrix(y_true, xgb_model.predict(x_full_xgb), 'XGBoost')
     
     elif option == '3':
         # precision-recall curves
         plt.figure(figsize=(8,6))
-        pr_curve(rf_model, x_full, y_true, 'Random Forest')
-        pr_curve(gb_model, x_full, y_true, 'Gradient Boosting')
-        pr_curve(xgb_model, x_full, y_true, 'XGBoost')
+        pr_curve(rf_model, x_full_rf, y_true, 'Random Forest')
+        pr_curve(gb_model, x_full_gb, y_true, 'Gradient Boosting')
+        pr_curve(xgb_model, x_full_xgb, y_true, 'XGBoost')
         plt.xlabel('Recall')
         plt.ylabel('Precision')
         plt.title('Precision-Recall Curve Comparison')
@@ -125,9 +132,9 @@ while True:
     
     elif option == '4':
         # feature importance
-        f_importance(rf_model, 'Random Forest', x_full.columns)
-        f_importance(gb_model, 'Gradient Boosting', x_full.columns)
-        f_importance(xgb_model, 'XGBoost', x_full.columns)
+        f_importance(rf_model, 'Random Forest', x_full_rf.columns)
+        f_importance(gb_model, 'Gradient Boosting', x_full_gb.columns)
+        f_importance(xgb_model, 'XGBoost', x_full_xgb.columns)
     
     elif option == '5':
         # model prediction comparison
