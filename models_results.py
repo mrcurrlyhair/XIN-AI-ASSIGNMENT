@@ -18,8 +18,17 @@ with open('saved_models/gb_model.pkl', 'rb') as f:
 with open('saved_models/xgb_model.pkl', 'rb') as f:
     xgb_model = pickle.load(f)
 
-# drop cars_involved 
+# drop cars_involved
 x_full = clean_traffic_data.drop(columns=['cars_involved'])
+
+# make predictions and save them to the dataset
+clean_traffic_data['rf_pred'] = rf_model.predict(x_full)
+clean_traffic_data['gb_pred'] = gb_model.predict(x_full)
+clean_traffic_data['xgb_pred'] = xgb_model.predict(x_full)
+
+# save dataset with predictions
+clean_traffic_data.to_csv('cleaned_traffic_accidents_predictions.csv', index=False)
+print('Predictions Saved') 
 
 # model performance benchmarks 
 def model_bench(model, x_full, y_true):
