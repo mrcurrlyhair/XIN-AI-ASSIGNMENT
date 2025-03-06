@@ -3,6 +3,26 @@ High risk accident models .
 High risk is classed as >=3 vehicles involved
 in the code and data sets, vehicals are called cars_involved or nun_units 
 
+====RESULTS====
+--- PRE-REMOVAL OF LEAST IMPORTANT macro-avg (Precision, Recall, F1-Score, Accuracy) ---
+
+Random Forrest - 0.57, 0.72, 0.56, 0.74
+
+XGBoost -  0.65, 0.52, 0.52, 0.92
+
+Gradient Boosting -  0.61, 0.60, 0.61, 0.90
+
+
+--- POST-REMOVAL OF LEAST IMPORTANT macro-avg (Precision, Recall, F1-Score, Accuracy)--- 
+
+
+Random Forrest - 0.57, 0.73, 0.63, 0.74
+
+XGBoost -  0.66, 0.52, 0.58, 0.92
+
+Gradient Boosting -  0.61, 0.60, 0.61, 0.90
+
+
 
 
 please make sure the files/folders are available before starting - 
@@ -19,9 +39,9 @@ pre_graphs.py
 traffic_accidents.csv
 
 WITH MODELS (optional but reconmended to save time computing) - 
-/saved_models/ gb_model.pkl
-/saved_models/ rf_model.pkl
-/saved_models/ xgb_model.pkl
+/saved_models/ gb_model.pkl (post-removal models)
+/saved_models/ rf_model.pkl (post-removal models)
+/saved_models/ xgb_model.pkl (post-removal models)
 /least_important/ least_important_gb
 /least_important/ least_important_rf
 /least_important/ least_important_xgb
