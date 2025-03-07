@@ -47,7 +47,9 @@ WITH MODELS (optional but reconmended to save time computing) -
 /least_important/ least_important_xgb
 
 
-
+Please note , pre and post removal of least important features are located in models_archive.
+To switch , please copy and paste the files into the saved_models folder.
+The orignal files in saved_models is post removal of least important features. 
 
 
 Please run in this order :
