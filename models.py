@@ -71,7 +71,7 @@ rf_grid.fit(x_train_rf_balanced, y_train_rf_balanced)
 
 # get best parameters for random forest
 best_rf_para = rf_grid.best_params_
-print("Best Random Forest Parameters", best_rf_para)
+print('Best Random Forest Parameters', best_rf_para)
 
 # train random forest with best parameters
 rf_model = RandomForestClassifier(**best_rf_para, random_state=28)
@@ -113,7 +113,7 @@ xgb_grid.fit(x_train_xgb_balanced, y_train_xgb_balanced)
 
 # get best parameters for xgboost
 best_xgb_para = xgb_grid.best_params_
-print("Best XGBoost Parameters", best_xgb_para)
+print('Best XGBoost Parameters', best_xgb_para)
 
 # train xgboost with best parameters
 xgb_model = XGBClassifier(**best_xgb_para, random_state=28)
@@ -156,7 +156,7 @@ gb_grid.fit(x_train_gb_balanced, y_train_gb_balanced)
 
 # get best parameters for gradient boosting
 best_gb_para = gb_grid.best_params_
-print("Best Gradient Boosting Parameters", best_gb_para)
+print('Best Gradient Boosting Parameters', best_gb_para)
 
 # train gradient boosting with best parameters
 gb_model = GradientBoostingClassifier(**best_gb_para, random_state=28)

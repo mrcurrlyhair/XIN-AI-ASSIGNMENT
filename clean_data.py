@@ -33,5 +33,3 @@ traffic_data.to_csv('cleaned_traffic_accidents.csv', index=False)
 
 print('data cleaned')
 
-
-D

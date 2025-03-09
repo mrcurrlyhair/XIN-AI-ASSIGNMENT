@@ -85,15 +85,15 @@ def f_importance(model, model_name, feature_names):
 
 # menu for graph selection
 while True:
-    print("\nSelect a graph to display")
-    print("1 Models Performance")
-    print("2 Confusion Matrixes")
-    print("3 Precision Recall Curves")
-    print("4 Feature Importance")
-    print("5 Models Prediction")
-    print("6 Quit")
+    print('\nSelect a graph to display')
+    print('1 Models Performance')
+    print('2 Confusion Matrixes')
+    print('3 Precision Recall Curves')
+    print('4 Feature Importance')
+    print('5 Models Prediction')
+    print('6 Quit')
     
-    option = input("Enter your choice")
+    option = input('Enter your choice')
     
     if option == '1':
         # bar chart for model performance
@@ -110,6 +110,7 @@ while True:
         plt.xticks(x, m_name)
         plt.legend()
         plt.show()
+        plt.close()
     
     elif option == '2':
         # confusion matrixes
@@ -129,6 +130,7 @@ while True:
         plt.legend()
         plt.grid()
         plt.show()
+        plt.close()
     
     elif option == '4':
         # feature importance
@@ -149,9 +151,10 @@ while True:
         plt.ylabel('Number of High-Risk Accidents')
         plt.title('Actual vs Predicted High-Risk Accident Comparison')
         plt.show()
+        plt.close()
     
     elif option == '6':
-        print("Quiting")
+        print('Quiting')
         break
     else:
-        print("Invalid option")
+        print('Invalid option, quiting')
