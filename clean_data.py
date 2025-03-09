@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 # load dataset
 traffic_data = pd.read_csv('traffic_accidents.csv')
@@ -33,3 +32,6 @@ traffic_data = pd.get_dummies(traffic_data, columns=OHEcolumns)
 traffic_data.to_csv('cleaned_traffic_accidents.csv', index=False)
 
 print('data cleaned')
+
+
+D
