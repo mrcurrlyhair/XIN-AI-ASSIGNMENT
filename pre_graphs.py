@@ -24,12 +24,19 @@ while True:
         # grouping by 'cars_involved' and amount of accidnts
         accidents = clean_traffic_data['cars_involved'].value_counts().sort_index()
         fatal = clean_traffic_data.groupby('cars_involved')['injuries_fatal'].sum()
+        fatal_percentage = (fatal/accidents * 100)
 
         # overlaping data on bar chart
         plt.figure(figsize=(8, 5))
-        accidents.plot(kind='bar', color='blue', edgecolor='black', alpha=0.5, label='Total Accidents')
+        percentage = accidents.plot(kind='bar', color='blue', edgecolor='black', alpha=0.5, label='Total Accidents')
         fatal.plot(kind='bar', color='red', edgecolor='black', alpha=0.7, label='Fatal Accidents')
         
+        # add percentages top the bar chart 
+        for i, (total, fatal_count, fatal_percentage) in enumerate(zip(accidents, fatal, fatal_percentage)):
+            if total :
+                percentage.text(i, fatal_count + 1, f'{fatal_percentage:.1f}%', ha='center', fontsize=10, color='black')
+
+
         plt.xlabel('Number of Cars Involved')
         plt.ylabel('Count')
         plt.title('Total Accidents vs Fatal Accidents by Number of Cars Involved')
