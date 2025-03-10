@@ -21,15 +21,23 @@ while True:
 
         
     if option == '1':
-            # distribution of number of cars involved
-            plt.figure(figsize=(8, 5))
-            plt.hist(clean_traffic_data['cars_involved'], bins=10, edgecolor='black')
-            plt.xlabel('Number of Cars Involved')
-            plt.ylabel('Count')
-            plt.title('Distribution of Cars Involved in Accidents')
-            plt.show()
-            plt.close()
+        # grouping by 'cars_involved' and amount of accidnts
+        accidents = clean_traffic_data['cars_involved'].value_counts().sort_index()
+        fatal = clean_traffic_data.groupby('cars_involved')['injuries_fatal'].sum()
+
+        # overlaping data on bar chart
+        plt.figure(figsize=(8, 5))
+        accidents.plot(kind='bar', color='blue', edgecolor='black', alpha=0.5, label='Total Accidents')
+        fatal.plot(kind='bar', color='red', edgecolor='black', alpha=0.7, label='Fatal Accidents')
         
+        plt.xlabel('Number of Cars Involved')
+        plt.ylabel('Count')
+        plt.title('Total Accidents vs Fatal Accidents by Number of Cars Involved')
+        plt.legend()
+        plt.show()
+        plt.close()
+
+
     elif option == '2':
             # accident frequency by hour / three or more vehicles
             plt.figure(figsize=(10, 5))
