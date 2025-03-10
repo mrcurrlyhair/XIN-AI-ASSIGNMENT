@@ -37,9 +37,9 @@ while True:
                 percentage.text(i, fatal_count + 1, f'{fatal_percentage:.1f}%', ha='center', fontsize=10, color='black')
 
 
-        plt.xlabel('Number of vehicles  Involved')
+        plt.xlabel('Number of Vehicles Involved')
         plt.ylabel('Count')
-        plt.title('Total Accidents vs Fatal Accidents by Number of vehicles Involved')
+        plt.title('Total Accidents vs Fatal Accidents by Number of Vehicles Involved')
         plt.legend()
         plt.show()
         plt.close()
