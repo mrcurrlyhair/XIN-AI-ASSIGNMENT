@@ -8,7 +8,7 @@ clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
 # menu for graph selection
 while True:
     print('\nSelect a graph to display')
-    print('1 Distribution of Cars Involved in Accidents')
+    print('1 Distribution of vehicles Involved in Accidents')
     print('2 Accident Frequency by Hour / three or more vehicles')
     print('3 Accident Frequency by Day of the Week / three or more vehicles')
     print('4 Weather Condition vs. Multi-Vehicle Accidents / three or more vehicles')
@@ -37,9 +37,9 @@ while True:
                 percentage.text(i, fatal_count + 1, f'{fatal_percentage:.1f}%', ha='center', fontsize=10, color='black')
 
 
-        plt.xlabel('Number of Cars Involved')
+        plt.xlabel('Number of vehicles  Involved')
         plt.ylabel('Count')
-        plt.title('Total Accidents vs Fatal Accidents by Number of Cars Involved')
+        plt.title('Total Accidents vs Fatal Accidents by Number of vehicles Involved')
         plt.legend()
         plt.show()
         plt.close()
