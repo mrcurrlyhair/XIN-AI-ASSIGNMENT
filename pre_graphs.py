@@ -89,7 +89,7 @@ while True:
             high_risk_weather.plot(kind='bar', color='b')
             plt.xlabel('Weather Condition')
             plt.ylabel('Number of Multi-Vehicle Accidents')
-            plt.title('Weather Condition vs. Multi-Vehicle Accidents')
+            plt.title('Weather Condition vs Accidents Involving 3 or More Vehicles')
             plt.xticks(rotation=90)
             plt.show()
             plt.close()
