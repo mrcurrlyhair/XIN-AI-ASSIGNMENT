@@ -81,12 +81,22 @@ while True:
                 'weather_condition_SNOW'
             ]
 
-            # filter for wether 
+            # filter for weather 
             high_risk_weather = clean_traffic_data[clean_traffic_data['cars_involved'] >= 3][weather_columns].sum()
             
+            # total accidents
+            total_accidents = clean_traffic_data[weather_columns].sum()
+
+            # high risk weather accidents
+            high_risk_weather = high_risk[weather_columns].sum()
+
+            # normalise data
+            high_risk_percentage = (high_risk_weather / total_accidents) * 100
+
+
             # plot the data
             plt.figure(figsize=(12, 5))
-            high_risk_weather.plot(kind='bar', color='b')
+            high_risk_percentage.plot(kind='bar', color='b')
             plt.xlabel('Weather Condition')
             plt.ylabel('Number of Multi-Vehicle Accidents')
             plt.title('Weather Condition vs Accidents Involving 3 or More Vehicles')
