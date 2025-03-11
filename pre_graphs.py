@@ -106,11 +106,11 @@ while True:
         
     elif option == '5':
             # correlation heatmap
-            plt.figure(figsize=(12, 8))
+            plt.figure(figsize=(30, 24))
             corr_matrix = clean_traffic_data.corr()
             sns.heatmap(corr_matrix, annot=False, cmap='coolwarm', linewidths=0.5)
-            plt.xticks(fontsize=6)
-            plt.yticks(fontsize=6)
+            plt.xticks(fontsize=4)
+            plt.yticks(fontsize=4)
             plt.title('Correlation Heatmap')
             plt.show()
             plt.close()
