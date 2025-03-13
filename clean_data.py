@@ -21,7 +21,7 @@ traffic_data = traffic_data.drop(toremove)
 traffic_data['crash_day_of_week'] = traffic_data['crash_day_of_week'].astype(int)
 traffic_data['cars_involved'] = traffic_data['cars_involved'].astype(int)
 traffic_data['crash_hour'] = traffic_data['crash_hour'].astype(int)
-
+traffic_data['crash_month'] = traffic_data['crash_month'].astype(int)
 traffic_data['injuries_fatal'] = traffic_data['injuries_fatal'] > 0
 
 # OHE variables

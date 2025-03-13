@@ -34,7 +34,7 @@ x_train_gb, x_test_gb, y_train_gb, y_test_gb = train_test_split(x_gb, y, test_si
 
 # scale integer features 
 scaler = StandardScaler()
-int_features = ['crash_hour', 'crash_day_of_week']
+int_features = ['crash_hour', 'crash_day_of_week', 'crash_month']
 x_train_rf[int_features] = scaler.fit_transform(x_train_rf[int_features])
 x_train_xgb[int_features] = scaler.transform(x_train_xgb[int_features])
 x_train_gb[int_features] = scaler.transform(x_train_gb[int_features])
