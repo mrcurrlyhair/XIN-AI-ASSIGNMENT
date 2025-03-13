@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 import pickle
 import pandas as pd 
-from sklearn.metrics import confusion_matrix, precision_recall_curve, accuracy_score, classification_report
+from sklearn.metrics import confusion_matrix, roc_curve, auc, classification_report
 
 # load cleaned dataset
 clean_traffic_data = pd.read_csv('cleaned_traffic_accidents.csv')
@@ -66,11 +66,12 @@ def matrix(y_true, y_pred, model_name):
     plt.show()
     plt.close()
 
-# function for precision-recall curves
-def pr_curve(model, x_full, y_true, model_name):
+# function for ROC curve
+def roc(model, x_full, y_true, model_name):
     y_probs = model.predict_proba(x_full)[:, 1]
-    precision, recall, _ = precision_recall_curve(y_true, y_probs)
-    plt.plot(recall, precision, label=model_name)
+    fpr, tpr, _ = roc_curve(y_true, y_probs)
+    auc_score = auc(fpr, tpr)
+    plt.plot(fpr, tpr, label=f'{model_name} (AUC = {auc_score:.2f})')
 
 # function to plot feature importances for decision tree models
 def f_importance(model, model_name, feature_names):
@@ -88,7 +89,7 @@ while True:
     print('\nSelect a graph to display')
     print('1 Models Performance')
     print('2 Confusion Matrixes')
-    print('3 Precision Recall Curves')
+    print('3 ROC Curves')
     print('4 Feature Importance')
     print('5 Models Prediction')
     print('6 Quit')
@@ -119,14 +120,14 @@ while True:
         matrix(y_true, xgb_model.predict(x_full_xgb), 'XGBoost')
     
     elif option == '3':
-        # precision-recall curves
+        # ROC curves
         plt.figure(figsize=(8,6))
-        pr_curve(rf_model, x_full_rf, y_true, 'Random Forest')
-        pr_curve(gb_model, x_full_gb, y_true, 'Gradient Boosting')
-        pr_curve(xgb_model, x_full_xgb, y_true, 'XGBoost')
-        plt.xlabel('Recall')
-        plt.ylabel('Precision')
-        plt.title('Precision-Recall Curve Comparison')
+        roc(rf_model, x_full_rf, y_true, 'Random Forest')
+        roc(gb_model, x_full_gb, y_true, 'Gradient Boosting')
+        roc(xgb_model, x_full_xgb, y_true, 'XGBoost')
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title('ROC Curve Comparison')
         plt.legend()
         plt.grid()
         plt.show()
